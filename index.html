@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#FF9A5C" />
+<meta name="description" content="领养一只会吃饭上学、会因天气生病的虚拟伙伴，陪它一起长大。" />
+<title>小团 · 陪伴</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" href="icon-192.png" />
+<link rel="apple-touch-icon" href="icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="小团" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+.auth{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:linear-gradient(135deg,#FFE3D2,#FFF4EC)}
+.auth .acard{background:#fff;padding:26px 22px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.1);width:320px}
+.auth h1{margin:0 0 14px;font-size:18px;color:#FF7A33;text-align:center}
+.auth input{width:100%;padding:10px;margin:8px 0;border:1px solid #e2e6ec;border-radius:8px}
+.auth .atabs{display:flex;gap:6px;margin-bottom:6px}
+.auth .atabs button{flex:1;padding:8px;border:1px solid #e2e6ec;background:#fff;border-radius:8px;cursor:pointer;color:#667}
+.auth .atabs button.active{background:#FFF0E6;color:#FF7A33;border-color:#FFD2B8;font-weight:600}
+.auth button#a-go{width:100%;padding:10px;margin-top:8px;border:0;border-radius:8px;background:#FF7A33;color:#fff;font-weight:600;cursor:pointer}
+.auth .err{color:#d33;min-height:18px;margin:6px 0 0;font-size:12px}
+.auth .local{display:block;text-align:center;margin-top:10px;color:#FF7A33;font-size:12px;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="auth" class="auth hidden"><div class="acard"></div></div>
+<div class="app-shell">
+  <div class="phone" id="phone">
+
+    <div class="statusbar">
+      <span id="sb-time" class="sb-time">--:--</span>
+      <span class="sb-slot"></span>
+      <span class="sb-right">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a6 6 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/></svg>
+        <span class="battery"><i></i></span>
+      </span>
+    </div>
+
+    <header class="topbar">
+      <button class="wcard" id="wcard" type="button">
+        <span class="wcard-ic" id="wcard-ic"></span>
+        <span class="wcard-txt">
+          <b id="wcard-temp">--°</b>
+          <em id="wcard-desc">获取天气…</em>
+        </span>
+      </button>
+      <div class="top-right">
+        <button class="chip" id="btn-date" type="button"><span id="date-label">今天</span></button>
+        <button class="chip coin" type="button" id="btn-coin"><span id="coin-ic"></span><b id="coin-val">0</b></button>
+        <button class="chip ghost" id="btn-ff" type="button" title="快进1小时">快进</button>
+        <button class="chip ghost" id="btn-out" type="button" hidden>退出</button>
+      </div>
+    </header>
+
+    <main class="view" id="view">
+      <!-- 首页：角色舞台 -->
+      <section id="home">
+        <div class="stage" id="stage">
+          <div class="scene" id="scene"></div>
+          <div class="pet-layer" id="pet-layer"></div>
+          <div class="pet-tap" id="pet-tap"></div>
+          <div class="bubble" id="bubble" hidden></div>
+          <div class="fx-layer" id="fx-layer"></div>
+          <div class="stage-tag" id="stage-tag"></div>
+        </div>
+
+        <div class="namecard">
+          <div class="nc-left">
+            <b id="pet-name">小团</b>
+            <span id="pet-stage">宝宝期</span>
+          </div>
+          <div class="nc-right">
+            <span class="bond"><i id="bond-ic"></i>陪伴 <b id="bond-val">0分钟</b></span>
+          </div>
+        </div>
+
+        <div class="acccard" id="acccard"></div>
+
+        <div class="stats" id="stats"></div>
+        <div class="quick" id="quick"></div>
+      </section>
+
+      <!-- 其它页 -->
+      <section id="page" hidden></section>
+    </main>
+
+    <nav class="tabbar" id="tabbar"></nav>
+
+    <div class="sheet-mask" id="sheet-mask" hidden>
+      <div class="sheet" id="sheet">
+        <div class="sheet-bar"></div>
+        <div class="sheet-head">
+          <h3 id="sheet-title">标题</h3>
+          <button class="sheet-x" id="sheet-x" type="button">关闭</button>
+        </div>
+        <div class="sheet-body" id="sheet-body"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+    <div class="home-bar"></div>
+  </div>
+</div>
+
+<script src="cloud.js"></script>
+<script src="data.js"></script>
+<script src="pet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

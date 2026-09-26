@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>小团·陪伴 管理后台</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.5 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f4f6f9; color: #1f2733; }
+  .hidden { display: none !important; }
+  .login { min-height: 100vh; display: grid; place-items: center; background: linear-gradient(135deg,#FFE3D2,#FFF4EC); }
+  .login .card { background:#fff; padding:28px 24px; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.08); width:320px; }
+  .login h1 { margin:0 0 16px; font-size:18px; color:#FF7A33; }
+  .login input { width:100%; padding:10px; margin:8px 0; border:1px solid #e2e6ec; border-radius:8px; }
+  .login button { width:100%; padding:10px; margin-top:8px; border:0; border-radius:8px; background:#FF7A33; color:#fff; font-weight:600; cursor:pointer; }
+  .err { color:#d33; min-height:18px; margin:6px 0 0; font-size:12px; }
+  .admin header { display:flex; align-items:center; gap:12px; padding:10px 16px; background:#fff; border-bottom:1px solid #e7ebf0; }
+  .admin header b { color:#FF7A33; }
+  .admin header #me { margin-left:auto; color:#667; }
+  .admin header button { border:1px solid #e2e6ec; background:#fff; border-radius:8px; padding:6px 12px; cursor:pointer; }
+  .body { display:flex; min-height:calc(100vh - 53px); }
+  nav { width:170px; background:#fff; border-right:1px solid #e7ebf0; padding:10px; }
+  nav button { display:block; width:100%; text-align:left; padding:10px 12px; margin:4px 0; border:0; background:transparent; border-radius:8px; cursor:pointer; color:#334; }
+  nav button.active { background:#FFF0E6; color:#FF7A33; font-weight:600; }
+  main { flex:1; padding:18px; overflow:auto; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; margin:10px 0 20px; }
+  .kpi { background:#fff; border:1px solid #e7ebf0; border-radius:12px; padding:14px; text-align:center; }
+  .kpi b { display:block; font-size:24px; color:#FF7A33; }
+  .kpi span { color:#889; font-size:12px; }
+  h3 { margin:18px 0 8px; }
+  .card { background:#fff; border:1px solid #e7ebf0; border-radius:12px; padding:14px; margin:10px 0; }
+  .card input, .card textarea, .toolbar input { width:100%; padding:8px; margin:6px 0; border:1px solid #e2e6ec; border-radius:8px; }
+  .card button, .toolbar button { border:0; background:#FF7A33; color:#fff; padding:8px 14px; border-radius:8px; cursor:pointer; margin-top:6px; }
+  .toolbar { display:flex; gap:8px; align-items:center; margin-bottom:10px; }
+  .toolbar input { flex:1; margin:0; }
+  .tbl { width:100%; border-collapse:collapse; background:#fff; border:1px solid #e7ebf0; border-radius:10px; overflow:hidden; }
+  .tbl th, .tbl td { padding:9px 10px; border-bottom:1px solid #eef1f5; text-align:left; vertical-align:top; }
+  .tbl th { background:#fafbfc; color:#667; font-weight:600; }
+  .tbl button { border:0; background:#FFE9DA; color:#FF7A33; padding:5px 9px; border-radius:6px; cursor:pointer; margin-right:4px; }
+  .bad { color:#d33; font-weight:600; }
+  label { display:block; margin:6px 0; }
+  label input { width:auto; margin-right:6px; }
+</style>
+</head>
+<body>
+
+<div id="login" class="login">
+  <div class="card">
+    <h1>小团·陪伴 管理后台</h1>
+    <input id="email" type="email" placeholder="管理员邮箱" />
+    <input id="pwd" type="password" placeholder="密码" />
+    <button id="login-btn">登录</button>
+    <p id="login-err" class="err"></p>
+  </div>
+</div>
+
+<div id="app" class="admin hidden">
+  <header>
+    <b>小团·陪伴 后台</b>
+    <span id="me"></span>
+    <button id="logout-btn">退出</button>
+  </header>
+  <div class="body">
+    <nav>
+      <button data-tab="dash">数据看板</button>
+      <button data-tab="users">用户与宠物</button>
+      <button data-tab="tx">充值 / 会员</button>
+      <button data-tab="tickets">客服工单</button>
+      <button data-tab="ops">运营配置</button>
+    </nav>
+    <main id="content"></main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
