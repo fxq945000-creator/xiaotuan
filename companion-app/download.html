@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>小团·陪伴 · 下载安装</title>
+<style>
+  :root{ --orange:#FF9A5C; --bg:#FFF7F0; --ink:#3a2b22; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+        background:linear-gradient(180deg,#FFE9D6,#FFF7F0); color:var(--ink); min-height:100vh;
+        display:flex; flex-direction:column; align-items:center; padding:32px 20px 48px; }
+  .card{ width:100%; max-width:420px; background:#fff; border-radius:24px; padding:28px 22px;
+         box-shadow:0 12px 30px rgba(255,154,92,.18); text-align:center; }
+  .logo{ width:96px; height:96px; border-radius:24px; box-shadow:0 6px 16px rgba(0,0,0,.12); }
+  h1{ font-size:24px; margin:14px 0 4px; }
+  .sub{ color:#9a8a7e; font-size:14px; margin:0 0 20px; }
+  .btn{ display:block; width:100%; padding:15px; border-radius:14px; font-size:17px; font-weight:600;
+        text-decoration:none; margin:10px 0; border:none; cursor:pointer; }
+  .btn-android{ background:var(--orange); color:#fff; }
+  .btn-ios{ background:#fff; color:var(--orange); border:2px solid var(--orange); }
+  .qr{ margin:18px auto 6px; width:200px; height:200px; border-radius:16px; background:#faf3ec;
+       display:flex; align-items:center; justify-content:center; }
+  .qr img{ width:180px; height:180px; }
+  .tip{ font-size:12px; color:#b3a397; margin-top:6px; }
+  .steps{ text-align:left; background:#FFF3E9; border-radius:14px; padding:14px 16px; margin-top:14px;
+          font-size:14px; line-height:1.7; display:none; }
+  .steps.show{ display:block; }
+  .steps b{ color:var(--orange); }
+  footer{ margin-top:18px; font-size:12px; color:#b3a397; text-align:center; }
+  footer a{ color:var(--orange); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="icon-512.png" alt="小团" />
+    <h1>小团 · 陪伴</h1>
+    <p class="sub">领养一只会吃饭上学的虚拟伙伴，陪它一起长大</p>
+
+    <a class="btn btn-android" id="apkBtn" href="/app-release.apk">安卓：下载安装包</a>
+    <button class="btn btn-ios" id="iosBtn" type="button">iPhone：查看安装方法</button>
+
+    <div class="qr"><img id="qr" alt="二维码" /></div>
+    <p class="tip">扫码打开本页，分享给朋友</p>
+
+    <div class="steps" id="steps">
+      <b>iPhone 安装步骤：</b><br/>
+      1. 用 Safari 打开本应用的网址（不要在微信里打开）。<br/>
+      2. 点底部工具栏的「分享」按钮（方框加箭头图标）。<br/>
+      3. 下滑找到并点击「添加到主屏幕」。<br/>
+      4. 桌面出现「小团」图标，点开即是全屏 App。<br/>
+      <span style="color:#9a8a7e">（iOS 暂不支持直接装 .apk，用此方式体验一致）</span>
+    </div>
+  </div>
+  <footer>由 小团·陪伴 提供 · 安装即同意 <a href="隐私政策.txt">隐私政策</a></footer>
+
+<script>
+  // ===== 如需修改，只改这里 =====
+  var CFG = {
+    apk: "/app-release.apk",      // 安卓安装包地址（默认放根目录，详见发布指南）
+    // apk: "https://github.com/你的名/你的仓库/releases/download/v1/app-release.apk", // 也可填外链
+  };
+  document.getElementById('apkBtn').href = CFG.apk;
+  document.getElementById('iosBtn').onclick = function(){
+    document.getElementById('steps').classList.toggle('show');
+  };
+  var qr = document.getElementById('qr');
+  try {
+    qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" +
+             encodeURIComponent(location.href);
+  } catch(e){ qr.alt = "二维码生成失败，可直接转发网址"; }
+</script>
+</body>
+</html>

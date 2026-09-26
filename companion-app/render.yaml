@@ -1,0 +1,19 @@
+# Render 一键部署配置（零依赖 Node 服务，无需 npm install）
+# 用法：把整个 companion-app 文件夹推到 GitHub 后，
+#   方式一：在 Render 新建 Web Service 关联该仓库，Render 会自动读取本文件；
+#   方式二：直接打开 https://render.com/deploy?repo=你的仓库地址 一键部署。
+services:
+  - type: web
+    name: xiaotuan-companion
+    runtime: node
+    plan: free
+    buildCommand: "echo skip-build"
+    startCommand: "node server.js"
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: ADMIN_EMAIL
+        value: ""          # 选填：填你的邮箱，注册即管理员（不填则第一个注册的是管理员）
+      - key: DATA_DIR
+        value: ""          # 选填：挂载持久磁盘后设为 /data，数据重启不丢（免费版无磁盘，详见发布指南）
